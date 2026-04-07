@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAVA Pet Shop - متجر مستلزمات الحيوانات الأليفة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: #3498db;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #2980b9;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .search-bar button {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #2980b9;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icon {
+            position: relative;
+            cursor: pointer;
+            color: #2c3e50;
+            font-size: 24px;
+            transition: 0.3s;
+        }
+
+        .header-icon:hover {
+            color: #3498db;
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Navigation */
+        nav {
+            background: #34495e;
+            padding: 0;
+        }
+
+        nav ul {
+            max-width: 1400px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #3498db;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Sidebar + Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            height: fit-content;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin: 8px 0;
+        }
+
+        .category-list a {
+            color: #34495e;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .category-list a:hover {
+            background: #ecf0f1;
+            color: #3498db;
+        }
+
+        .category-list i {
+            font-size: 18px;
+            width: 25px;
+        }
+
+        /* Products Grid */
+        .products-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .section-header h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .view-btn {
+            background: #ecf0f1;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .view-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border: 1px solid #ecf0f1;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-brand {
+            color: #7f8c8d;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .product-name {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 8px 0;
+            min-height: 45px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 10px 0;
+            color: #f39c12;
+            font-size: 14px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .current-price {
+            color: #e74c3c;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #95a5a6;
+            font-size: 16px;
+            text-decoration: line-through;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            left: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            left: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            background: #3498db;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 20px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .qty-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid #ecf0f1;
+            background: #f8f9fa;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #229954;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #95a5a6;
+        }
+
+        .empty-cart i {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Services Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #ecf0f1;
+            border-radius: 12px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .service-card h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            color: #34495e;
+            font-size: 15px;
+        }
+
+        .book-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .payment-card {
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .payment-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .payment-card i {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .payment-card h4 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin: 10px 0;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 40px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-bar {
+                margin: 10px 0;
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                left: -100%;
+            }
+
+            .cart-sidebar.open {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div>
+                <i class="fas fa-phone"></i> اتصل بنا: 01274055727
+            </div>
+            <div>
+                🚚 توصيل مجاني للطلبات فوق 5000 جنيه
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-paw"></i>
+                LAVA PET SHOP
+            </a>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="ابحث عن المنتجات...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="header-icons">
+                <div class="header-icon">
+                    <i class="far fa-heart"></i>
+                    <span class="badge">0</span>
+                </div>
+                <div class="header-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartBadge">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#birds"><i class="fas fa-dove"></i> الطيور</a></li>
+            <li><a href="#cats"><i class="fas fa-cat"></i> القطط</a></li>
+            <li><a href="#dogs"><i class="fas fa-dog"></i> الكلاب</a></li>
+            <li><a href="#reptiles"><i class="fas fa-dragon"></i> الزواحف</a></li>
+            <li><a href="#grooming"><i class="fas fa-cut"></i> الجرومينج</a></li>
+            <li><a href="#offers"><i class="fas fa-tags"></i> العروض</a></li>
+        </ul>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">الرئيسية</a> / <span>جميع المنتجات</span>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3><i class="fas fa-filter"></i> الأقسام</h3>
+                <ul class="category-list">
+                    <li><a href="#birds"><i class="fas fa-dove"></i> الطيور والعصافير</a></li>
+                    <li><a href="#cats"><i class="fas fa-cat"></i> القطط</a></li>
+                    <li><a href="#dogs"><i class="fas fa-dog"></i> الكلاب</a></li>
+                    <li><a href="#reptiles"><i class="fas fa-dragon"></i> الزواحف</a></li>
+                    <li><a href="#grooming"><i class="fas fa-cut"></i> خدمات الجرومينج</a></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;"><i class="fas fa-star"></i> الأكثر مبيعاً</h3>
+                <ul class="category-list">
+                    <li><a href="#"><i class="fas fa-fire"></i> أكل القطط</a></li>
+                    <li><a href="#"><i class="fas fa-fire"></i> رمل القطط</a></li>
+                    <li><a href="#"><i class="fas fa-fire"></i> ألعاب الكلاب</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Birds Section -->
+                <section class="products-section" id="birds">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dove"></i> قسم الطيور والعصافير</h2>
+                        <div class="view-options">
+                            <button class="view-btn active"><i class="fas fa-th"></i></button>
+                            <button class="view-btn"><i class="fas fa-list"></i></button>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">أقفاص وأعشاش</h3>
+                    <div class="products-grid" id="birds-cages"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">طعام ومستلزمات</h3>
+                    <div class="products-grid" id="birds-food"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">ملحقات</h3>
+                    <div class="products-grid" id="birds-accessories"></div>
+                </section>
+
+                <!-- Cats Section -->
+                <section class="products-section" id="cats" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cat"></i> قسم القطط</h2>
+                    </div>
+
+                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">مستلزمات أساسية</h3>
+                    <div class="products-grid" id="cats-essentials"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">رمل القطط</h3>
+                    <div class="products-grid" id="cats-litter"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">العناية والصحة</h3>
+                    <div class="products-grid" id="cats-care"></div>
+                </section>
+
+                <!-- Dogs Section -->
+                <section class="products-section" id="dogs" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dog"></i> قسم الكلاب</h2>
+                    </div>
+
+                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">طعام ومستلزمات</h3>
+                    <div class="products-grid" id="dogs-food"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">مكافآت وكالسيوم</h3>
+                    <div class="products-grid" id="dogs-treats"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">إكسسوارات</h3>
+                    <div class="products-grid" id="dogs-accessories"></div>
+
+                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">العناية</h3>
+                    <div class="products-grid" id="dogs-care"></div>
+                </section>
+
+                <!-- Reptiles Section -->
+                <section class="products-section" id="reptiles" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-dragon"></i> قسم الزواحف والسلاحف</h2>
+                    </div>
+                    <div class="products-grid" id="reptiles-products"></div>
+                </section>
+
+                <!-- Grooming Services -->
+                <section class="products-section" id="grooming" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cut"></i> خدمات الجرومينج</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h3><i class="fas fa-cat"></i> جرومينج القطط الكبيرة</h3>
+                            <div class="service-item">
+                                <span class="service-name">حلاقة قطط كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('حلاقة قطط كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور عادي قطط كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور عادي قطط كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور طبي للفطريات قطط كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور طبي قطط كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">قص أظافر قطط كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('قص أظافر قطط كبيرة')">احجز</button>
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <h3><i class="fas fa-cat"></i> جرومينج القطط الصغيرة</h3>
+                            <div class="service-item">
+                                <span class="service-name">حلاقة قطط صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('حلاقة قطط صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور عادي قطط صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور عادي قطط صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور طبي للفطريات قطط صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور طبي قطط صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">قص أظافر قطط صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('قص أظافر قطط صغيرة')">احجز</button>
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <h3><i class="fas fa-dog"></i> جرومينج الكلاب الكبيرة</h3>
+                            <div class="service-item">
+                                <span class="service-name">حلاقة كلاب كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('حلاقة كلاب كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور عادي كلاب كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور طبي للفطريات كلاب كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب كبيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">قص أظافر كلاب كبيرة</span>
+                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب كبيرة')">احجز</button>
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <h3><i class="fas fa-dog"></i> جرومينج الكلاب الصغيرة</h3>
+                            <div class="service-item">
+                                <span class="service-name">حلاقة كلاب صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('حلاقة كلاب صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور عادي كلاب صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">شاور طبي للفطريات كلاب صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب صغيرة')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">قص أظافر كلاب صغيرة</span>
+                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب صغيرة')">احجز</button>
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <h3><i class="fas fa-tools"></i> خدمات إضافية</h3>
+                            <div class="service-item">
+                                <span class="service-name">تنظيف أذن</span>
+                                <button class="book-btn" onclick="addToCart('تنظيف أذن')">احجز</button>
+                            </div>
+                            <div class="service-item">
+                                <span class="service-name">تفريغ غدة</span>
+                                <button class="book-btn" onclick="addToCart('تفريغ غدة')">احجز</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payment Methods -->
+                <section class="products-section" id="payment" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-credit-card"></i> طرق الدفع المتاحة</h2>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="payment-card">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <h4>كاش عند التسليم</h4>
+                            <p style="color: #7f8c8d; font-size: 14px; margin-top: 10px;">ادفع عند استلام طلبك</p>
+                        </div>
+                        <div class="payment-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>إنستا باي</h4>
+                            <p style="color: #7f8c8d; font-size: 14px; margin-top: 10px;">الدفع عبر إنستا باي</p>
+                        </div>
+                        <div class="payment-card">
+                            <i class="fab fa-cc-visa"></i>
+                            <h4>فودافون كاش</h4>
+                            <p style="color: #7f8c8d; font-size: 14px; margin-top: 10px;">الدفع عبر فودافون كاش</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> سلة التسوق</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>السلة فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>المجموع:</span>
+                <span id="cartTotal">0 جنيه</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> إتمام الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/201274055727" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-paw"></i> LAVA Pet Shop</h3>
+                <p style="color: #95a5a6; line-height: 1.8;">
+                    متجرك المتخصص في مستلزمات الحيوانات الأليفة. نوفر كل ما تحتاجه لرعاية حيوانك الأليف.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#birds">الطيور</a></li>
+                    <li><a href="#cats">القطط</a></li>
+                    <li><a href="#dogs">الكلاب</a></li>
+                    <li><a href="#reptiles">الزواحف</a></li>
+                    <li><a href="#grooming">خدمات الجرومينج</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>خدمة العملاء</h3>
+                <ul>
+                    <li><a href="#">سياسة الاسترجاع</a></li>
+                    <li><a href="#">الشحن والتوصيل</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">من نحن</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 01274055727</li>
+                    <li><i class="fas fa-mobile-alt"></i> 01000716738</li>
+                    <li><i class="fas fa-envelope"></i> info@lavapetshop.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2024 LAVA Pet Shop - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // Products Data
+        const productsData = {
+            birdsCages: [
+                { name: 'قفص عصافير أسترالي', icon: '🏠', category: 'أقفاص' },
+                { name: 'قفص كوكتيل', icon: '🏠', category: 'أقفاص' },
+                { name: 'عش أسترالي', icon: '🪺', category: 'أعشاش' },
+                { name: 'عش كوكتيل', icon: '🪺', category: 'أعشاش' },
+                { name: 'عش فيشر', icon: '🪺', category: 'أعشاش' },
+                { name: 'عش إنجليزي', icon: '🪺', category: 'أعشاش' },
+                { name: 'عش عصافير زيبرا', icon: '🪺', category: 'أعشاش' }
+            ],
+            birdsFood: [
+                { name: 'أكلة عصافير صغيرة', icon: '🌾', category: 'طعام' },
+                { name: 'أكلة عصافير وسط', icon: '🌾', category: 'طعام' },
+                { name: 'أكلة عصافير كبيرة', icon: '🌾', category: 'طعام' },
+                { name: 'كارينا للكناري/زيبرا', icon: '🌾', category: 'طعام' },
+                { name: 'كالسيوم عصافير', icon: '💊', category: 'مكملات' },
+                { name: 'حامل سيبيا', icon: '🦴', category: 'ملحقات' },
+                { name: 'نشارة للعش', icon: '🌿', category: 'ملحقات' }
+            ],
+            birdsAccessories: [
+                { name: 'وقافة صغيرة', icon: '🪵', category: 'ملحقات' },
+                { name: 'وقافة كبيرة', icon: '🪵', category: 'ملحقات' },
+                { name: 'وقافة خشب أسترالي', icon: '🪵', category: 'ملحقات' },
+                { name: 'وقافة خشب كوكتيل', icon: '🪵', category: 'ملحقات' },
+                { name: 'وقافة خشب روز/فيشر', icon: '🪵', category: 'ملحقات' },
+                { name: 'حامل قفص', icon: '🔧', category: 'ملحقات' },
+                { name: 'مسقى صغيرة', icon: '💧', category: 'ملحقات' },
+                { name: 'مسقى وسط', icon: '💧', category: 'ملحقات' },
+                { name: 'مسقى كبيرة', icon: '💧', category: 'ملحقات' },
+                { name: 'أباجورة تدفئة للحيوانات والطيور والزواحف', icon: '💡', category: 'إضاءة' }
+            ],
+            catsEssentials: [
+                { name: 'قفص قطط', icon: '🏠', category: 'مستلزمات' },
+                { name: 'بوكس قطط', icon: '📦', category: 'مستلزمات' },
+                { name: 'شنطة قطط', icon: '👜', category: 'مستلزمات' },
+                { name: 'فرشة شعر صغيرة', icon: '🪮', category: 'عناية' },
+                { name: 'فرشة شعر وسط', icon: '🪮', category: 'عناية' },
+                { name: 'فرشة شعر كبيرة', icon: '🪮', category: 'عناية' },
+                { name: 'دراي فود بيربو قطط', icon: '🍖', category: 'طعام' },
+                { name: 'دراي فود دودزي قطط', icon: '🍖', category: 'طعام' },
+                { name: 'كانز ميجلور قطط', icon: '🥫', category: 'طعام' },
+                { name: 'دراي فود جوسيرا', icon: '🍖', category: 'طعام' },
+                { name: 'دراي ميرا', icon: '🍖', category: 'طعام' }
+            ],
+            catsLitter: [
+                { name: 'رمل قطط مصري 5 كيلو', icon: '🪨', category: 'رمل' },
+                { name: 'رمل قطط مصري 10 كيلو', icon: '🪨', category: 'رمل' },
+                { name: 'رمل خشب', icon: '🌲', category: 'رمل' },
+                { name: 'رمل قطط تركي 5 كيلو', icon: '🪨', category: 'رمل' },
+                { name: 'رمل قطط تركي 10 كيلو', icon: '🪨', category: 'رمل' },
+                { name: 'طبق رمل صغير', icon: '📦', category: 'مستلزمات' },
+                { name: 'طبق رمل وسط', icon: '📦', category: 'مستلزمات' },
+                { name: 'طبق رمل كبير', icon: '📦', category: 'مستلزمات' },
+                { name: 'جاروف وسط', icon: '🥄', category: 'مستلزمات' },
+                { name: 'جاروف كبير', icon: '🥄', category: 'مستلزمات' }
+            ],
+            catsCare: [
+                { name: 'قصافة أظافر قطط وسط', icon: '✂️', category: 'عناية' },
+                { name: 'قصافة قطط كبيرة', icon: '✂️', category: 'عناية' },
+                { name: 'شامبو قطط أومني جارد للحشرات', icon: '🧴', category: 'عناية' },
+                { name: 'حبوب ديدان قطط', icon: '💊', category: 'صحة' },
+                { name: 'أمبول برص', icon: '💉', category: 'صحة' }
+            ],
+            dogsFood: [
+                { name: 'دراي فود ميجور', icon: '🦴', category: 'طعام' },
+                { name: 'دراي فود تشاوتشاو', icon: '🦴', category: 'طعام' },
+                { name: 'طبق أكل كلاب صغير', icon: '🥣', category: 'مستلزمات' },
+                { name: 'طبق أكل كلاب وسط', icon: '🥣', category: 'مستلزمات' },
+                { name: 'طبق أكل كلاب كبير', icon: '🥣', category: 'مستلزمات' }
+            ],
+            dogsTreats: [
+                { name: 'عظم كالسيوم كلاب صغيرة', icon: '🦴', category: 'مكافآت' },
+                { name: 'عظم كالسيوم كلاب متوسطة', icon: '🦴', category: 'مكافآت' },
+                { name: 'عظم كالسيوم كلاب كبيرة', icon: '🦴', category: 'مكافآت' },
+                { name: 'مكافآت كلاب صغيرة', icon: '🍖', category: 'مكافآت' },
+                { name: 'مكافآت كلاب وسط', icon: '🍖', category: 'مكافآت' },
+                { name: 'مكافآت كلاب كبيرة', icon: '🍖', category: 'مكافآت' }
+            ],
+            dogsAccessories: [
+                { name: 'سلسلة كلاب صغيرة', icon: '⛓️', category: 'إكسسوارات' },
+                { name: 'سلسلة كلاب وسط', icon: '⛓️', category: 'إكسسوارات' },
+                { name: 'سلسلة كلاب كبيرة', icon: '⛓️', category: 'إكسسوارات' },
+                { name: 'طوق كلاب صغير', icon: '⭕', category: 'إكسسوارات' },
+                { name: 'طوق كلاب وسط', icon: '⭕', category: 'إكسسوارات' },
+                { name: 'طوق كلاب كبير', icon: '⭕', category: 'إكسسوارات' }
+            ],
+            dogsCare: [
+                { name: 'قصافة كلاب وسط', icon: '✂️', category: 'عناية' },
+                { name: 'قصافة كلاب كبيرة', icon: '✂️', category: 'عناية' },
+                { name: 'حبوب ديدان كلاب', icon: '💊', category: 'صحة' }
+            ],
+            reptilesProducts: [
+                { name: 'بيت سلحفاة 50 سم', icon: '🏠', category: 'مستلزمات' },
+                { name: 'بيت سلحفاة 60 سم', icon: '🏠', category: 'مستلزمات' },
+                { name: 'بيت سلحفاة 1 متر', icon: '🏠', category: 'مستلزمات' },
+                { name: 'تربة للسلاحف', icon: '🌱', category: 'مستلزمات' },
+                { name: 'أباجورة تدفئة', icon: '💡', category: 'إضاءة' },
+                { name: 'لمبة تدفئة', icon: '💡', category: 'إضاءة' }
+            ]
+        };
+
+        // Cart
+        let cart = [];
+
+        // Render Products
+        function renderProducts() {
+            Object.keys(productsData).forEach(category => {
+                const container = document.getElementById(category.replace(/([A-Z])/g, '-$1').toLowerCase());
+                if (container) {
+                    productsData[category].forEach(product => {
+                        const productCard = `
+                            <div class="product-card">
+                                <div class="product-actions">
+                                    <button class="action-btn"><i class="far fa-heart"></i></button>
+                                    <button class="action-btn"><i class="far fa-eye"></i></button>
+                                </div>
+                                <div class="product-image">${product.icon}</div>
+                                <div class="product-info">
+                                    <div class="product-brand">${product.category}</div>
+                                    <div class="product-name">${product.name}</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span style="color: #7f8c8d; margin-right: 5px;">(125)</span>
+                                    </div>
+                                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', '${product.icon}')">
+                                        <i class="fas fa-shopping-cart"></i> أضف للسلة
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += productCard;
+                    });
+                }
+            });
+        }
+
+        // Add to Cart
+        function addToCart(name, icon = '📦') {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name, icon, quantity: 1 });
+            }
+            updateCart();
+            showNotification('تم إضافة المنتج للسلة بنجاح');
+        }
+
+        // Update Cart
+        function updateCart() {
+            const cartBadge = document.getElementById('cartBadge');
+            const cartItems = document.getElementById('cartItems');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>السلة فارغة</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = '';
+                cart.forEach((item, index) => {
+                    cartItems.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-image">${item.icon}</div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="quantity-control">
+                                    <button class="qty-btn" onclick="changeQuantity(${index}, -1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="qty-display">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="changeQuantity(${index}, 1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <i class="fas fa-trash remove-item" onclick="removeFromCart(${index})"></i>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Change Quantity
+        function changeQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCart();
+        }
+
+        // Remove from Cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Toggle Cart
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('overlay');
+            cartSidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('السلة فارغة!');
+                return;
+            }
+
+            let message = '🛒 *طلب جديد من LAVA Pet Shop*%0A';
+            message += '━━━━━━━━━━━━━━━━━━━%0A%0A';
+
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name}%0A`;
+                message += `   الكمية: ${item.quantity}%0A%0A`;
+            });
+
+            message += '━━━━━━━━━━━━━━━━━━━%0A%0A';
+            message += '💳 *طرق الدفع المتاحة:*%0A';
+            message += '• كاش عند التسليم%0A';
+            message += '• إنستا باي%0A';
+            message += '• فودافون كاش%0A%0A';
+            message += '📞 سيتم التواصل معك لتأكيد الطلب';
+
+            window.open(`https://wa.me/201274055727?text=${message}`, '_blank');
+        }
+
+        // Show Notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                card.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        // Initialize
+        renderProducts();
+        updateCart();
+
+        // Close cart when clicking outside
+        document.getElementById('overlay').addEventListener('click', toggleCart);
+    </script>
+
+</body>
+
+</html>
