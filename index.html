@@ -262,7 +262,7 @@
             width: 25px;
         }
 
-        /* Products Grid */
+        /* Products Section */
         .products-section {
             background: white;
             border-radius: 10px;
@@ -306,10 +306,85 @@
             color: white;
         }
 
+        /* Tabs System */
+        .tabs-container {
+            margin: 20px 0;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #ecf0f1;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #7f8c8d;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: #3498db;
+            background: #f8f9fa;
+        }
+
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            background: #ecf8ff;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sub-category-title {
+            color: #2c3e50;
+            font-size: 18px;
+            margin: 25px 0 15px;
+            padding: 10px 15px;
+            background: linear-gradient(to right, #ecf0f1, transparent);
+            border-right: 4px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 25px;
+            margin-bottom: 30px;
         }
 
         /* Product Card */
@@ -608,6 +683,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .checkout-btn:hover {
@@ -827,11 +906,40 @@
             cursor: pointer;
             transition: 0.3s;
             z-index: 1000;
+            text-decoration: none;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(37,211,102,0.6);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         /* Responsive */
@@ -874,33 +982,23 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
-        }
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #27ae60;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 10000;
-            animation: slideInRight 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
+            .tabs-header {
+                overflow-x: auto;
+                flex-wrap: nowrap;
             }
-            to {
-                transform: translateX(0);
-                opacity: 1;
+
+            .tab-btn {
+                white-space: nowrap;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .product-image {
+                height: 180px;
+                font-size: 60px;
             }
         }
     </style>
@@ -999,72 +1097,167 @@
                         </div>
                     </div>
 
-                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">أقفاص وأعشاش</h3>
+                    <h3 class="sub-category-title"><i class="fas fa-home"></i> أقفاص وأعشاش</h3>
                     <div class="products-grid" id="birds-cages"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">طعام ومستلزمات</h3>
+                    <h3 class="sub-category-title"><i class="fas fa-seedling"></i> طعام ومستلزمات</h3>
                     <div class="products-grid" id="birds-food"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">ملحقات</h3>
+                    <h3 class="sub-category-title"><i class="fas fa-tools"></i> ملحقات</h3>
                     <div class="products-grid" id="birds-accessories"></div>
                 </section>
 
-                <!-- Cats Section -->
+                <!-- Cats Section with Tabs -->
                 <section class="products-section" id="cats" style="margin-top: 30px;">
                     <div class="section-header">
                         <h2><i class="fas fa-cat"></i> قسم القطط</h2>
                     </div>
 
-                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">🌾 أكل جاف للقطط - ماركة Doodzy</h3>
-                    <div class="products-grid" id="cats-dry-doodzy"></div>
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-btn active" onclick="switchTab('cats', 'dry-food', event)">
+                                <i class="fas fa-drumstick-bite"></i> الطعام الجاف
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('cats', 'wet-food', event)">
+                                <i class="fas fa-fish"></i> الطعام الرطب
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('cats', 'litter', event)">
+                                <i class="fas fa-box"></i> الرمل
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('cats', 'care', event)">
+                                <i class="fas fa-spa"></i> العناية والصحة
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('cats', 'accessories', event)">
+                                <i class="fas fa-home"></i> المستلزمات
+                            </button>
+                        </div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">🌾 أكل جاف للقطط - ماركة CEZAR</h3>
-                    <div class="products-grid" id="cats-dry-cezar"></div>
+                        <!-- Tab 1: Dry Food -->
+                        <div id="cats-dry-food-tab" class="tab-content active">
+                            <h4 class="sub-category-title"><i class="fas fa-star"></i> Doodzy Premium</h4>
+                            <div class="products-grid" id="cats-dry-doodzy"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">🌾 أكل جاف للقطط - ماركات أخرى</h3>
-                    <div class="products-grid" id="cats-dry-other"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-certificate"></i> CEZAR</h4>
+                            <div class="products-grid" id="cats-dry-cezar"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">🥫 أكل رطب للقطط (كانز وأظرف)</h3>
-                    <div class="products-grid" id="cats-wet"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-shopping-bag"></i> ماركات أخرى</h4>
+                            <div class="products-grid" id="cats-dry-others"></div>
+                        </div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">🪨 رمل القطط</h3>
-                    <div class="products-grid" id="cats-litter"></div>
+                        <!-- Tab 2: Wet Food -->
+                        <div id="cats-wet-food-tab" class="tab-content">
+                            <h4 class="sub-category-title"><i class="fas fa-utensils"></i> Groovy Pâté 400g</h4>
+                            <div class="products-grid" id="cats-wet-groovy"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">مستلزمات أساسية</h3>
-                    <div class="products-grid" id="cats-essentials"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-can-food"></i> علب كبيرة 400g</h4>
+                            <div class="products-grid" id="cats-wet-cans"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">العناية والصحة</h3>
-                    <div class="products-grid" id="cats-care"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-box-open"></i> علب صغيرة</h4>
+                            <div class="products-grid" id="cats-wet-small"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-envelope"></i> أظرف (Pouches)</h4>
+                            <div class="products-grid" id="cats-wet-pouches"></div>
+                        </div>
+
+                        <!-- Tab 3: Litter -->
+                        <div id="cats-litter-tab" class="tab-content">
+                            <h4 class="sub-category-title"><i class="fas fa-gem"></i> Doodzy</h4>
+                            <div class="products-grid" id="cats-litter-doodzy"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-certificate"></i> CEZAR & Pure Cat</h4>
+                            <div class="products-grid" id="cats-litter-premium"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-boxes"></i> أنواع متنوعة</h4>
+                            <div class="products-grid" id="cats-litter-various"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-tools"></i> مستلزمات الرمل</h4>
+                            <div class="products-grid" id="cats-litter-accessories"></div>
+                        </div>
+
+                        <!-- Tab 4: Care -->
+                        <div id="cats-care-tab" class="tab-content">
+                            <h4 class="sub-category-title"><i class="fas fa-cut"></i> أدوات العناية</h4>
+                            <div class="products-grid" id="cats-care-tools"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-medkit"></i> الصحة والعلاج</h4>
+                            <div class="products-grid" id="cats-care-health"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-candy-cane"></i> المكافآت</h4>
+                            <div class="products-grid" id="cats-care-treats"></div>
+                        </div>
+
+                        <!-- Tab 5: Accessories -->
+                        <div id="cats-accessories-tab" class="tab-content">
+                            <div class="products-grid" id="cats-accessories-items"></div>
+                        </div>
+                    </div>
                 </section>
 
-                <!-- Dogs Section -->
+                <!-- Dogs Section with Tabs -->
                 <section class="products-section" id="dogs" style="margin-top: 30px;">
                     <div class="section-header">
                         <h2><i class="fas fa-dog"></i> قسم الكلاب</h2>
                     </div>
 
-                    <h3 style="color: #7f8c8d; margin: 20px 0 15px; font-size: 18px;">🌾 أكل جاف للكلاب</h3>
-                    <div class="products-grid" id="dogs-dry"></div>
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-btn active" onclick="switchTab('dogs', 'dry-food', event)">
+                                <i class="fas fa-bone"></i> الطعام الجاف
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('dogs', 'wet-food', event)">
+                                <i class="fas fa-can-food"></i> الطعام الرطب
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('dogs', 'treats', event)">
+                                <i class="fas fa-cookie-bite"></i> المكافآت
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('dogs', 'accessories', event)">
+                                <i class="fas fa-shield-dog"></i> الإكسسوارات
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('dogs', 'care', event)">
+                                <i class="fas fa-spa"></i> العناية
+                            </button>
+                        </div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">طعام ومستلزمات</h3>
-                    <div class="products-grid" id="dogs-food"></div>
+                        <!-- Tab 1: Dry Food -->
+                        <div id="dogs-dry-food-tab" class="tab-content active">
+                            <h4 class="sub-category-title"><i class="fas fa-star"></i> Doodzy Dogs</h4>
+                            <div class="products-grid" id="dogs-dry-doodzy"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">مكافآت وكالسيوم</h3>
-                    <div class="products-grid" id="dogs-treats"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-certificate"></i> CEZAR & Others</h4>
+                            <div class="products-grid" id="dogs-dry-others"></div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">إكسسوارات</h3>
-                    <div class="products-grid" id="dogs-accessories"></div>
+                            <h4 class="sub-category-title"><i class="fas fa-bowl-food"></i> مستلزمات الأكل</h4>
+                            <div class="products-grid" id="dogs-dry-bowls"></div>
+                        </div>
 
-                    <h3 style="color: #7f8c8d; margin: 30px 0 15px; font-size: 18px;">العناية</h3>
-                    <div class="products-grid" id="dogs-care"></div>
-                </section>
+                        <!-- Tab 2: Wet Food -->
+                        <div id="dogs-wet-food-tab" class="tab-content">
+                            <div class="products-grid" id="dogs-wet-cans"></div>
+                        </div>
 
-                <!-- Other Products Section -->
-                <section class="products-section" id="other-products" style="margin-top: 30px;">
-                    <div class="section-header">
-                        <h2><i class="fas fa-star"></i> منتجات أخرى</h2>
+                        <!-- Tab 3: Treats -->
+                        <div id="dogs-treats-tab" class="tab-content">
+                            <h4 class="sub-category-title"><i class="fas fa-bone"></i> عظام الكالسيوم</h4>
+                            <div class="products-grid" id="dogs-treats-bones"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-award"></i> المكافآت</h4>
+                            <div class="products-grid" id="dogs-treats-snacks"></div>
+                        </div>
+
+                        <!-- Tab 4: Accessories -->
+                        <div id="dogs-accessories-tab" class="tab-content">
+                            <h4 class="sub-category-title"><i class="fas fa-link"></i> السلاسل</h4>
+                            <div class="products-grid" id="dogs-accessories-chains"></div>
+
+                            <h4 class="sub-category-title"><i class="fas fa-circle"></i> الأطواق</h4>
+                            <div class="products-grid" id="dogs-accessories-collars"></div>
+                        </div>
+
+                        <!-- Tab 5: Care -->
+                        <div id="dogs-care-tab" class="tab-content">
+                            <div class="products-grid" id="dogs-care-items"></div>
+                        </div>
                     </div>
-                    <div class="products-grid" id="other-products-grid"></div>
                 </section>
 
                 <!-- Reptiles Section -->
@@ -1085,19 +1278,19 @@
                             <h3><i class="fas fa-cat"></i> جرومينج القطط الكبيرة</h3>
                             <div class="service-item">
                                 <span class="service-name">حلاقة قطط كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('حلاقة قطط كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('حلاقة قطط كبيرة', '✂️')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور عادي قطط كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور عادي قطط كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور عادي قطط كبيرة', '🚿')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور طبي للفطريات قطط كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور طبي قطط كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور طبي قطط كبيرة', '💊')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">قص أظافر قطط كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('قص أظافر قطط كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('قص أظافر قطط كبيرة', '💅')">احجز</button>
                             </div>
                         </div>
 
@@ -1105,19 +1298,19 @@
                             <h3><i class="fas fa-cat"></i> جرومينج القطط الصغيرة</h3>
                             <div class="service-item">
                                 <span class="service-name">حلاقة قطط صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('حلاقة قطط صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('حلاقة قطط صغيرة', '✂️')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور عادي قطط صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور عادي قطط صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور عادي قطط صغيرة', '🚿')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور طبي للفطريات قطط صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور طبي قطط صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور طبي قطط صغيرة', '💊')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">قص أظافر قطط صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('قص أظافر قطط صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('قص أظافر قطط صغيرة', '💅')">احجز</button>
                             </div>
                         </div>
 
@@ -1125,19 +1318,19 @@
                             <h3><i class="fas fa-dog"></i> جرومينج الكلاب الكبيرة</h3>
                             <div class="service-item">
                                 <span class="service-name">حلاقة كلاب كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('حلاقة كلاب كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('حلاقة كلاب كبيرة', '✂️')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور عادي كلاب كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب كبيرة', '🚿')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور طبي للفطريات كلاب كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب كبيرة', '💊')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">قص أظافر كلاب كبيرة</span>
-                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب كبيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب كبيرة', '💅')">احجز</button>
                             </div>
                         </div>
 
@@ -1145,19 +1338,19 @@
                             <h3><i class="fas fa-dog"></i> جرومينج الكلاب الصغيرة</h3>
                             <div class="service-item">
                                 <span class="service-name">حلاقة كلاب صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('حلاقة كلاب صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('حلاقة كلاب صغيرة', '✂️')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور عادي كلاب صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور عادي كلاب صغيرة', '🚿')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">شاور طبي للفطريات كلاب صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('شاور طبي كلاب صغيرة', '💊')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">قص أظافر كلاب صغيرة</span>
-                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب صغيرة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('قص أظافر كلاب صغيرة', '💅')">احجز</button>
                             </div>
                         </div>
 
@@ -1165,11 +1358,11 @@
                             <h3><i class="fas fa-tools"></i> خدمات إضافية</h3>
                             <div class="service-item">
                                 <span class="service-name">تنظيف أذن</span>
-                                <button class="book-btn" onclick="addToCart('تنظيف أذن')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('تنظيف أذن', '👂')">احجز</button>
                             </div>
                             <div class="service-item">
                                 <span class="service-name">تفريغ غدة</span>
-                                <button class="book-btn" onclick="addToCart('تفريغ غدة')">احجز</button>
+                                <button class="book-btn" onclick="addToCart('تفريغ غدة', '💉')">احجز</button>
                             </div>
                         </div>
                     </div>
@@ -1217,7 +1410,7 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>المجموع:</span>
-                <span id="cartTotal">0 جنيه</span>
+                <span id="cartTotal">0 منتج</span>
             </div>
             <button class="checkout-btn" onclick="checkout()">
                 <i class="fab fa-whatsapp"></i> إتمام الطلب عبر واتساب
@@ -1276,7 +1469,7 @@
                 <ul>
                     <li><i class="fas fa-phone"></i> 01274055727</li>
                     <li><i class="fas fa-mobile-alt"></i> 01000716738</li>
-                    <li><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e8efe7eec1ede0f7e0f1e4f5f2e9eef1afe2eeec">[email&#160;protected]</a></li>
+                    <li><i class="fas fa-envelope"></i> info@lavapetshop.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</li>
                 </ul>
             </div>
@@ -1287,93 +1480,12 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Products Data
+    <script>
+        // Products Data - القائمة الكاملة المحدثة
         const productsData = {
-            // ===== أكل جاف للقطط - Doodzy =====
-            catsDryDoodzy: [
-                {name: 'Doodzy Classico Cat 1kg - دجاج وأسماك', icon: '🐱', category: 'Doodzy'},
-                {name: 'Doodzy Classico Cat 5kg - دجاج وأسماك', icon: '🐱', category: 'Doodzy'},
-                {name: 'Doodzy Classico Cat 10kg - دجاج وأسماك', icon: '🐱', category: 'Doodzy'},
-                {name: 'Doodzy Classico Cat 20kg - دجاج وأسماك', icon: '🐱', category: 'Doodzy'},
-                {name: 'Doodzy Cat Premium 1kg', icon: '⭐', category: 'Doodzy'},
-                {name: 'Doodzy Cat Premium 10kg', icon: '⭐', category: 'Doodzy'},
-                {name: 'Doodzy Cat Premium 15kg', icon: '⭐', category: 'Doodzy'},
-                {name: 'Doodzy Cat Super Premium 1kg', icon: '🌟', category: 'Doodzy'},
-                {name: 'Doodzy Cat Super Premium 10kg', icon: '🌟', category: 'Doodzy'},
-                {name: 'Doodzy Cat Super Premium 15kg', icon: '🌟', category: 'Doodzy'},
-                {name: 'Doodzy Cat Junior 1kg - دجاج', icon: '🐾', category: 'Doodzy'},
-                {name: 'Doodzy Cat Junior 2kg - دجاج', icon: '🐾', category: 'Doodzy'},
-                {name: 'Doodzy Cat Junior 5kg - دجاج', icon: '🐾', category: 'Doodzy'},
-                {name: 'Doodzy Cat Junior 10kg - دجاج', icon: '🐾', category: 'Doodzy'},
-                {name: 'Doodzy Weight Control 1.5kg - دجاج خفيف', icon: '⚖️', category: 'Doodzy'},
-                {name: 'Doodzy Weight Control 4kg - دجاج خفيف', icon: '⚖️', category: 'Doodzy'},
-                {name: 'Doodzy Energy Boost 2kg - دجاج وبروتين', icon: '💪', category: 'Doodzy'},
-                {name: 'Doodzy Energy Boost 5kg - دجاج وبروتين', icon: '💪', category: 'Doodzy'},
-            ],
-            // ===== أكل جاف للقطط - CEZAR =====
-            catsDryCezar: [
-                {name: 'CEZAR CAT 1kg', icon: '🐱', category: 'CEZAR'},
-                {name: 'CEZAR CAT 15kg', icon: '🐱', category: 'CEZAR'},
-                {name: 'CEZAR CAT MIX 15kg', icon: '🔀', category: 'CEZAR'},
-            ],
-            // ===== أكل جاف للقطط - ماركات أخرى =====
-            catsDryOther: [
-                {name: 'Migma Basic Adult Cat 1kg', icon: '🐱', category: 'Migma'},
-                {name: 'My Dear Cat 1.5kg - عادي', icon: '🐱', category: 'My Dear'},
-                {name: 'My Dear Cat 1.5kg - Mix', icon: '🔀', category: 'My Dear'},
-                {name: 'My Dear Cat 1.5kg - Ring', icon: '⭕', category: 'My Dear'},
-                {name: 'My Dear Cat 10kg', icon: '🐱', category: 'My Dear'},
-                {name: 'Aleef Adult Cat Food 1kg', icon: '🐱', category: 'Aleef'},
-                {name: 'VittaMax Gato Carne 1kg - لحم', icon: '🥩', category: 'VittaMax'},
-                {name: 'Bewi Cat Delicaties 1kg', icon: '🐱', category: 'Bewi Cat'},
-                {name: 'Ecofat Cat Food 1kg', icon: '🐱', category: 'Ecofat'},
-                {name: 'Alpha Cat Food 1.5kg', icon: '🐱', category: 'Alpha'},
-                {name: 'Allegra Adult 15kg', icon: '🐱', category: 'Allegra'},
-                {name: 'Zee Cat 1.5kg', icon: '🐱', category: 'Zee'},
-            ],
-            // ===== أكل رطب للقطط =====
-            catsWet: [
-                {name: 'Groovy Classic Pâté 400g - دجاج', icon: '🥣', category: 'Groovy'},
-                {name: 'Groovy Classic Pâté 400g - لحم بقر', icon: '🥣', category: 'Groovy'},
-                {name: 'Groovy Classic Pâté 400g - سلمون', icon: '🥣', category: 'Groovy'},
-                {name: 'Groovy Classic Pâté 400g - ديك رومي', icon: '🥣', category: 'Groovy'},
-                {name: 'Blubo / ProCat Can 400g', icon: '🥫', category: 'Blubo'},
-                {name: 'Blubo / ProCat Can 415g', icon: '🥫', category: 'Blubo'},
-                {name: 'Filos Cat Can 400g - قطع', icon: '🥫', category: 'Filos'},
-                {name: 'Filos Cat Can 400g - باتيه', icon: '🥫', category: 'Filos'},
-                {name: 'Doodzy Cat Can 400g', icon: '🥫', category: 'Doodzy'},
-                {name: 'Pet Vit & P9 Cat Can 400g', icon: '🥫', category: 'Pet Vit'},
-                {name: 'Bestpet Gourmet - معلبات متنوعة', icon: '🥫', category: 'Bestpet'},
-                {name: 'Bewi Cat Can 400g', icon: '🥫', category: 'Bewi Cat'},
-                {name: 'Milo Can 400g', icon: '🥫', category: 'Milo'},
-                {name: 'Yummy Can 400g', icon: '🥫', category: 'Yummy'},
-                {name: 'Pets Zone Can 400g', icon: '🥫', category: 'Pets Zone'},
-                {name: 'Morando Can 400g', icon: '🥫', category: 'Morando'},
-                {name: 'شيزر كانز صغير 85g', icon: '🥫', category: 'شيزر'},
-                {name: 'كيت كات كانز 70g', icon: '🥫', category: 'كيت كات'},
-                {name: 'كيت كات كانز 150g', icon: '🥫', category: 'كيت كات'},
-                {name: 'أبلاوز كانز 70g', icon: '🥫', category: 'أبلاوز'},
-                {name: 'أبلاوز كانز 156g', icon: '🥫', category: 'أبلاوز'},
-                {name: 'Club 4 Paws Pouch 85g - عجل', icon: '🛍️', category: 'Club 4 Paws'},
-                {name: 'Club 4 Paws Pouch 85g - دجاج', icon: '🛍️', category: 'Club 4 Paws'},
-                {name: 'Felix Pouch 85g - As Good As It Looks', icon: '🛍️', category: 'Felix'},
-                {name: 'Whiskas Pouch 85g', icon: '🛍️', category: 'Whiskas'},
-                {name: 'Friskies Pouch 85g - Gravy Beef', icon: '🛍️', category: 'Friskies'},
-                {name: 'Friskies Pouch 85g - Gravy Chicken', icon: '🛍️', category: 'Friskies'},
-                {name: 'Royal Canin Pouch 85g', icon: '👑', category: 'Royal Canin'},
-            ],
-            // ===== أكل جاف للكلاب =====
-            dogsDry: [
-                {name: 'Doodzy Dog Adult 5kg', icon: '🐕', category: 'Doodzy'},
-                {name: 'Doodzy Dog Adult 20kg', icon: '🐕', category: 'Doodzy'},
-                {name: 'Doodzy Dog Junior 1kg', icon: '🐶', category: 'Doodzy'},
-                {name: 'Doodzy Dog Junior 15kg', icon: '🐶', category: 'Doodzy'},
-                {name: 'CEZAR DOG 1kg', icon: '🐕', category: 'CEZAR'},
-                {name: 'CEZAR DOG 15kg', icon: '🐕', category: 'CEZAR'},
-                {name: 'GUSTO DOG 20kg', icon: '🐕', category: 'GUSTO'},
-            ],
-            // ===== رمل القطط (مُحدَّث) =====
+            // ═══════════════════════════════════════
+            // 🐦 قسم الطيور
+            // ═══════════════════════════════════════
             birdsCages: [
                 {name: 'قفص عصافير أسترالي', icon: '🏠', category: 'أقفاص'},
                 {name: 'قفص كوكتيل', icon: '🏠', category: 'أقفاص'},
@@ -1388,6 +1500,7 @@
                 {name: 'أكلة عصافير وسط', icon: '🌾', category: 'طعام'},
                 {name: 'أكلة عصافير كبيرة', icon: '🌾', category: 'طعام'},
                 {name: 'كارينا للكناري/زيبرا', icon: '🌾', category: 'طعام'},
+                {name: 'بذور عباد الشمس', icon: '🌻', category: 'طعام'},
                 {name: 'كالسيوم عصافير', icon: '💊', category: 'مكملات'},
                 {name: 'حامل سيبيا', icon: '🦴', category: 'ملحقات'},
                 {name: 'نشارة للعش', icon: '🌿', category: 'ملحقات'}
@@ -1401,78 +1514,258 @@
                 {name: 'حامل قفص', icon: '🔧', category: 'ملحقات'},
                 {name: 'مسقى صغيرة', icon: '💧', category: 'ملحقات'},
                 {name: 'مسقى وسط', icon: '💧', category: 'ملحقات'},
-                {name: 'مسقى كبيرة', icon: '💧', category: 'ملحقات'}
+                {name: 'مسقى كبيرة', icon: '💧', category: 'ملحقات'},
+                {name: 'أباجورة تدفئة للحيوانات والطيور', icon: '💡', category: 'إضاءة'}
             ],
-            catsEssentials: [
-                {name: 'قفص قطط', icon: '🏠', category: 'مستلزمات'},
-                {name: 'بوكس قطط', icon: '📦', category: 'مستلزمات'},
-                {name: 'شنطة قطط', icon: '👜', category: 'مستلزمات'},
+
+            // ═══════════════════════════════════════
+            // 🐱 قسم القطط - الطعام الجاف
+            // ═══════════════════════════════════════
+            catsDryDoodzy: [
+                {name: 'Doodzy Classico Cat 1kg - دجاج وسمك', icon: '🍗', category: 'Doodzy'},
+                {name: 'Doodzy Classico Cat 5kg - دجاج وسمك', icon: '🍗', category: 'Doodzy'},
+                {name: 'Doodzy Classico Cat 10kg - دجاج وسمك', icon: '🍗', category: 'Doodzy'},
+                {name: 'Doodzy Classico Cat 20kg - دجاج وسمك', icon: '🍗', category: 'Doodzy'},
+                {name: 'Doodzy Cat Premium 1kg', icon: '⭐', category: 'Doodzy'},
+                {name: 'Doodzy Cat Premium 10kg', icon: '⭐', category: 'Doodzy'},
+                {name: 'Doodzy Cat Premium 15kg', icon: '⭐', category: 'Doodzy'},
+                {name: 'Doodzy Cat Super Premium 1kg', icon: '👑', category: 'Doodzy'},
+                {name: 'Doodzy Cat Super Premium 10kg', icon: '👑', category: 'Doodzy'},
+                {name: 'Doodzy Cat Super Premium 15kg', icon: '👑', category: 'Doodzy'},
+                {name: 'Doodzy Cat Junior 1kg - قطط صغيرة', icon: '🐱', category: 'Doodzy'},
+                {name: 'Doodzy Cat Junior 2kg - قطط صغيرة', icon: '🐱', category: 'Doodzy'},
+                {name: 'Doodzy Cat Junior 5kg - قطط صغيرة', icon: '🐱', category: 'Doodzy'},
+                {name: 'Doodzy Cat Junior 10kg - قطط صغيرة', icon: '🐱', category: 'Doodzy'},
+                {name: 'Doodzy Weight Control 1.5kg', icon: '⚖️', category: 'Doodzy'},
+                {name: 'Doodzy Weight Control 4kg', icon: '⚖️', category: 'Doodzy'},
+                {name: 'Doodzy Energy Boost 2kg', icon: '⚡', category: 'Doodzy'},
+                {name: 'Doodzy Energy Boost 5kg', icon: '⚡', category: 'Doodzy'}
+            ],
+
+            catsDryCezar: [
+                {name: 'CEZAR CAT 1kg', icon: '🍖', category: 'CEZAR'},
+                {name: 'CEZAR CAT 15kg', icon: '🍖', category: 'CEZAR'},
+                {name: 'CEZAR CAT MIX 15kg', icon: '🎨', category: 'CEZAR'}
+            ],
+
+            catsDryOthers: [
+                {name: 'Migma Basic Adult Cat 1kg', icon: '🍖', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 1.5kg - عادي', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 10kg - عادي', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 1.5kg - Mix', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 10kg - Mix', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 1.5kg - Ring', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'My Dear Cat Turkish 10kg - Ring', icon: '🇹🇷', category: 'أخرى'},
+                {name: 'Aleef Adult Cat Food 1kg', icon: '🍖', category: 'أخرى'},
+                {name: 'VittaMax Gato Carne 1kg - لحم', icon: '🥩', category: 'أخرى'},
+                {name: 'Bewi Cat Delicaties 1kg', icon: '🍖', category: 'أخرى'},
+                {name: 'Ecofat Cat Food 1kg', icon: '🌿', category: 'أخرى'},
+                {name: 'Alpha Cat Food 1.5kg', icon: '🍖', category: 'أخرى'},
+                {name: 'Allegra Adult 15kg', icon: '🍖', category: 'أخرى'},
+                {name: 'Zee Cat 1.5kg', icon: '🍖', category: 'أخرى'},
+                {name: 'دراي فود بيربو قطط', icon: '🍖', category: 'أخرى'},
+                {name: 'دراي فود جوسيرا', icon: '🍖', category: 'أخرى'},
+                {name: 'دراي ميرا', icon: '🍖', category: 'أخرى'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐱 قسم القطط - الطعام الرطب
+            // ═══════════════════════════════════════
+            catsWetGroovy: [
+                {name: 'Groovy Classic Pâté 400g - دجاج', icon: '🍗', category: 'Groovy'},
+                {name: 'Groovy Classic Pâté 400g - لحم بقر', icon: '🥩', category: 'Groovy'},
+                {name: 'Groovy Classic Pâté 400g - سلمون', icon: '🐟', category: 'Groovy'},
+                {name: 'Groovy Classic Pâté 400g - ديك رومي', icon: '🦃', category: 'Groovy'}
+            ],
+
+            catsWetCans: [
+                {name: 'Blubo Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'ProCat Cat Can 415g', icon: '🥫', category: 'علب'},
+                {name: 'Filos Cat Can 400g - قطع', icon: '🥫', category: 'علب'},
+                {name: 'Filos Cat Can 400g - باتيه', icon: '🥫', category: 'علب'},
+                {name: 'Doodzy Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Pet Vit Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'P9 Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Bestpet Gourmet 400g', icon: '🥫', category: 'علب'},
+                {name: 'Bewi Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Milo Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Yummy Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Pets Zone Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'Morando Cat Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'كانز ميجلور قطط 400g', icon: '🥫', category: 'علب'}
+            ],
+
+            catsWetSmall: [
+                {name: 'شيزر 85g', icon: '🥫', category: 'صغيرة'},
+                {name: 'كيت كات 70g', icon: '🥫', category: 'صغيرة'},
+                {name: 'كيت كات 150g', icon: '🥫', category: 'صغيرة'},
+                {name: 'أبلاوز 70g', icon: '🥫', category: 'صغيرة'},
+                {name: 'أبلاوز 156g', icon: '🥫', category: 'صغيرة'}
+            ],
+
+            catsWetPouches: [
+                {name: 'Club 4 Paws 85g - عجل', icon: '📦', category: 'أظرف'},
+                {name: 'Club 4 Paws 85g - دجاج', icon: '📦', category: 'أظرف'},
+                {name: 'Felix As Good As It Looks 85g', icon: '📦', category: 'أظرف'},
+                {name: 'Whiskas Pouch 85g', icon: '📦', category: 'أظرف'},
+                {name: 'Friskies Gravy Beef 85g', icon: '📦', category: 'أظرف'},
+                {name: 'Friskies Gravy Chicken 85g', icon: '📦', category: 'أظرف'},
+                {name: 'Royal Canin Pouch 85g', icon: '📦', category: 'أظرف'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐱 قسم القطط - الرمل
+            // ═══════════════════════════════════════
+            catsLitterDoodzy: [
+                {name: 'رمل Doodzy 5L - عادي', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 10L - عادي', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 20L - عادي', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 5L - اقتصادي غامق', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 10L - اقتصادي غامق', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 5L - فاتح', icon: '🪨', category: 'Doodzy'},
+                {name: 'رمل Doodzy 10L - فاتح', icon: '🪨', category: 'Doodzy'}
+            ],
+
+            catsLitterPremium: [
+                {name: 'رمل CEZAR 5L', icon: '🪨', category: 'CEZAR'},
+                {name: 'رمل CEZAR 10L - أبيض', icon: '🪨', category: 'CEZAR'},
+                {name: 'رمل Pure Cat 5L - خوخ', icon: '🍑', category: 'Pure Cat'},
+                {name: 'رمل Pure Cat 10L - خوخ', icon: '🍑', category: 'Pure Cat'}
+            ],
+
+            catsLitterVarious: [
+                {name: 'رمل Catmoon 5L - صابون مرسيليا', icon: '🧼', category: 'متنوع'},
+                {name: 'رمل Catmoon 10L - صابون مرسيليا', icon: '🧼', category: 'متنوع'},
+                {name: 'رمل Catmoon 20L - صابون مرسيليا', icon: '🧼', category: 'متنوع'},
+                {name: 'رمل Catonite 5L - لافندر', icon: '💜', category: 'متنوع'},
+                {name: 'رمل Catonite 10L - لافندر', icon: '💜', category: 'متنوع'},
+                {name: 'رمل Bentonit 5L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Bentonit 10L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Catmania 5L - لافندر', icon: '💜', category: 'متنوع'},
+                {name: 'رمل Jingo 5L - بودرة أطفال', icon: '👶', category: 'متنوع'},
+                {name: 'رمل Benty Sandy 5L - بودرة أطفال', icon: '👶', category: 'متنوع'},
+                {name: 'رمل Cat Town 5L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Cat Town 10L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Candy 5L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Candy 10L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Zee 5L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل Zee 10L', icon: '🪨', category: 'متنوع'},
+                {name: 'رمل King Clean - سيليكا جل', icon: '💎', category: 'متنوع'}
+            ],
+
+            catsLitterAccessories: [
+                {name: 'طبق رمل صغير', icon: '📦', category: 'مستلزمات'},
+                {name: 'طبق رمل وسط', icon: '📦', category: 'مستلزمات'},
+                {name: 'طبق رمل كبير', icon: '📦', category: 'مستلزمات'},
+                {name: 'جاروف وسط', icon: '🥄', category: 'مستلزمات'},
+                {name: 'جاروف كبير', icon: '🥄', category: 'مستلزمات'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐱 قسم القطط - العناية
+            // ═══════════════════════════════════════
+            catsCareTools: [
+                {name: 'قصافة أظافر قطط وسط', icon: '✂️', category: 'عناية'},
+                {name: 'قصافة قطط كبيرة', icon: '✂️', category: 'عناية'},
                 {name: 'فرشة شعر صغيرة', icon: '🪮', category: 'عناية'},
                 {name: 'فرشة شعر وسط', icon: '🪮', category: 'عناية'},
                 {name: 'فرشة شعر كبيرة', icon: '🪮', category: 'عناية'}
             ],
-            // ===== رمل القطط =====
-            catsLitter: [
-                {name: 'Doodzy رمل 5L - عادي', icon: '🪨', category: 'Doodzy'},
-                {name: 'Doodzy رمل 10L - عادي', icon: '🪨', category: 'Doodzy'},
-                {name: 'Doodzy رمل 20L - عادي', icon: '🪨', category: 'Doodzy'},
-                {name: 'Doodzy رمل 5L - اقتصادي غامق', icon: '🪨', category: 'Doodzy'},
-                {name: 'Doodzy رمل 10L - اقتصادي غامق', icon: '🪨', category: 'Doodzy'},
-                {name: 'Doodzy رمل 5L - فاتح', icon: '🪨', category: 'Doodzy'},
-                {name: 'CEZAR رمل 5L', icon: '🪨', category: 'CEZAR'},
-                {name: 'CEZAR رمل 10L - أبيض', icon: '🪨', category: 'CEZAR'},
-                {name: 'Pure Cat Litter 5L - خوخ', icon: '🍑', category: 'Pure'},
-                {name: 'Pure Cat Litter 10L - خوخ', icon: '🍑', category: 'Pure'},
-                {name: 'Catmoon رمل 5L - صابون مرسيليا', icon: '🪨', category: 'Catmoon'},
-                {name: 'Catmoon رمل 10L - صابون مرسيليا', icon: '🪨', category: 'Catmoon'},
-                {name: 'Catmoon رمل 20L - صابون مرسيليا', icon: '🪨', category: 'Catmoon'},
-                {name: 'Catonite / Bentonit رمل 5L - لافندر', icon: '💜', category: 'Catonite'},
-                {name: 'Catonite / Bentonit رمل 10L - لافندر', icon: '💜', category: 'Catonite'},
-                {name: 'Catonite / Bentonit رمل 20L - لافندر', icon: '💜', category: 'Catonite'},
-                {name: 'Catmania رمل 5L - لافندر', icon: '💜', category: 'Catmania'},
-                {name: 'Jingo / Benty Sandy 5L - بودرة أطفال', icon: '🪨', category: 'Jingo'},
-                {name: 'Cat Town رمل 5L', icon: '🪨', category: 'Cat Town'},
-                {name: 'Cat Town رمل 10L', icon: '🪨', category: 'Cat Town'},
-                {name: 'Candy رمل 5L', icon: '🪨', category: 'Candy'},
-                {name: 'Candy رمل 10L', icon: '🪨', category: 'Candy'},
-                {name: 'Zee رمل 5L', icon: '🪨', category: 'Zee'},
-                {name: 'Zee رمل 10L', icon: '🪨', category: 'Zee'},
-                {name: 'King Clean - رمل سيليكا Silica Gel', icon: '💎', category: 'King Clean'},
-            ],
-            catsCare: [
-                {name: 'قصافة أظافر قطط وسط', icon: '✂️', category: 'عناية'},
-                {name: 'قصافة قطط كبيرة', icon: '✂️', category: 'عناية'},
-                {name: 'شامبو قطط أومني جارد للحشرات', icon: '🧴', category: 'عناية'},
+
+            catsCareHealth: [
+                {name: 'شامبو قطط أومني جارد للحشرات', icon: '🧴', category: 'صحة'},
                 {name: 'حبوب ديدان قطط', icon: '💊', category: 'صحة'},
                 {name: 'أمبول برص', icon: '💉', category: 'صحة'}
             ],
-            dogsFood: [
-                {name: 'دراي فود ميجور', icon: '🦴', category: 'طعام'},
+
+            catsCareTreats: [
+                {name: 'مكافآت قطط - برطمان', icon: '🍖', category: 'مكافآت'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐱 قسم القطط - المستلزمات
+            // ═══════════════════════════════════════
+            catsAccessoriesItems: [
+                {name: 'قفص قطط', icon: '🏠', category: 'مستلزمات'},
+                {name: 'بوكس قطط', icon: '📦', category: 'مستلزمات'},
+                {name: 'شنطة قطط', icon: '👜', category: 'مستلزمات'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐕 قسم الكلاب - الطعام الجاف
+            // ═══════════════════════════════════════
+            dogsDryDoodzy: [
+                {name: 'Doodzy Dog Adult 5kg', icon: '🦴', category: 'Doodzy'},
+                {name: 'Doodzy Dog Adult 20kg', icon: '🦴', category: 'Doodzy'},
+                {name: 'Doodzy Dog Junior 1kg', icon: '🐕', category: 'Doodzy'},
+                {name: 'Doodzy Dog Junior 15kg', icon: '🐕', category: 'Doodzy'}
+            ],
+
+            dogsDryOthers: [
+                {name: 'CEZAR DOG 1kg', icon: '🦴', category: 'CEZAR'},
+                {name: 'CEZAR DOG 15kg', icon: '🦴', category: 'CEZAR'},
+                {name: 'GUSTO DOG 20kg', icon: '🦴', category: 'أخرى'},
+                {name: 'دراي فود ميجور', icon: '🦴', category: 'أخرى'},
+                {name: 'دراي فود تشاوتشاو', icon: '🦴', category: 'أخرى'}
+            ],
+
+            dogsDryBowls: [
                 {name: 'طبق أكل كلاب صغير', icon: '🥣', category: 'مستلزمات'},
                 {name: 'طبق أكل كلاب وسط', icon: '🥣', category: 'مستلزمات'},
                 {name: 'طبق أكل كلاب كبير', icon: '🥣', category: 'مستلزمات'}
             ],
-            dogsTreats: [
-                {name: 'عظم كالسيوم كلاب صغيرة', icon: '🦴', category: 'مكافآت'},
-                {name: 'عظم كالسيوم كلاب متوسطة', icon: '🦴', category: 'مكافآت'},
-                {name: 'عظم كالسيوم كلاب كبيرة', icon: '🦴', category: 'مكافآت'},
+
+            // ═══════════════════════════════════════
+            // 🐕 قسم الكلاب - الطعام الرطب
+            // ═══════════════════════════════════════
+            dogsWetCans: [
+                {name: 'Pet Vit Dog Can 400g', icon: '🥫', category: 'علب'},
+                {name: 'P9 Dog Can 400g', icon: '🥫', category: 'علب'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐕 قسم الكلاب - المكافآت
+            // ═══════════════════════════════════════
+            dogsTreatsBones: [
+                {name: 'عظم كالسيوم كلاب صغيرة', icon: '🦴', category: 'كالسيوم'},
+                {name: 'عظم كالسيوم كلاب متوسطة', icon: '🦴', category: 'كالسيوم'},
+                {name: 'عظم كالسيوم كلاب كبيرة', icon: '🦴', category: 'كالسيوم'}
+            ],
+
+            dogsTreatsSnacks: [
                 {name: 'مكافآت كلاب صغيرة', icon: '🍖', category: 'مكافآت'},
                 {name: 'مكافآت كلاب وسط', icon: '🍖', category: 'مكافآت'},
-                {name: 'مكافآت كلاب كبيرة', icon: '🍖', category: 'مكافآت'}
+                {name: 'مكافآت كلاب كبيرة', icon: '🍖', category: 'مكافآت'},
+                {name: 'مكافآت كلاب - برطمان', icon: '🍖', category: 'مكافآت'}
             ],
-            dogsAccessories: [
-                {name: 'سلسلة كلاب صغيرة', icon: '⛓️', category: 'إكسسوارات'},
-                {name: 'سلسلة كلاب وسط', icon: '⛓️', category: 'إكسسوارات'},
-                {name: 'سلسلة كلاب كبيرة', icon: '⛓️', category: 'إكسسوارات'},
-                {name: 'طوق كلاب صغير', icon: '⭕', category: 'إكسسوارات'},
-                {name: 'طوق كلاب وسط', icon: '⭕', category: 'إكسسوارات'},
-                {name: 'طوق كلاب كبير', icon: '⭕', category: 'إكسسوارات'}
+
+            // ═══════════════════════════════════════
+            // 🐕 قسم الكلاب - الإكسسوارات
+            // ═══════════════════════════════════════
+            dogsAccessoriesChains: [
+                {name: 'سلسلة كلاب صغيرة', icon: '⛓️', category: 'سلاسل'},
+                {name: 'سلسلة كلاب وسط', icon: '⛓️', category: 'سلاسل'},
+                {name: 'سلسلة كلاب كبيرة', icon: '⛓️', category: 'سلاسل'}
             ],
-            dogsCare: [
+
+            dogsAccessoriesCollars: [
+                {name: 'طوق كلاب صغير', icon: '⭕', category: 'أطواق'},
+                {name: 'طوق كلاب وسط', icon: '⭕', category: 'أطواق'},
+                {name: 'طوق كلاب كبير', icon: '⭕', category: 'أطواق'}
+            ],
+
+            // ═══════════════════════════════════════
+            // 🐕 قسم الكلاب - العناية
+            // ═══════════════════════════════════════
+            dogsCareItems: [
                 {name: 'قصافة كلاب وسط', icon: '✂️', category: 'عناية'},
                 {name: 'قصافة كلاب كبيرة', icon: '✂️', category: 'عناية'},
                 {name: 'حبوب ديدان كلاب', icon: '💊', category: 'صحة'}
             ],
+
+            // ═══════════════════════════════════════
+            // 🐢 قسم الزواحف
+            // ═══════════════════════════════════════
             reptilesProducts: [
                 {name: 'بيت سلحفاة 50 سم', icon: '🏠', category: 'مستلزمات'},
                 {name: 'بيت سلحفاة 60 سم', icon: '🏠', category: 'مستلزمات'},
@@ -1480,12 +1773,6 @@
                 {name: 'تربة للسلاحف', icon: '🌱', category: 'مستلزمات'},
                 {name: 'أباجورة تدفئة', icon: '💡', category: 'إضاءة'},
                 {name: 'لمبة تدفئة', icon: '💡', category: 'إضاءة'}
-            ],
-            otherProductsGrid: [
-                {name: 'بذور عباد الشمس - كيس', icon: '🌻', category: 'طعام'},
-                {name: 'مكافآت للحيوانات الأليفة - برطمان صغير', icon: '🍖', category: 'مكافآت'},
-                {name: 'مكافآت للحيوانات الأليفة - برطمان وسط', icon: '🍖', category: 'مكافآت'},
-                {name: 'مكافآت للحيوانات الأليفة - برطمان كبير', icon: '🍖', category: 'مكافآت'},
             ]
         };
 
@@ -1493,30 +1780,9 @@
         let cart = [];
 
         // Render Products
-        const categoryIdMap = {
-            birdsCages: 'birds-cages',
-            birdsFood: 'birds-food',
-            birdsAccessories: 'birds-accessories',
-            catsDryDoodzy: 'cats-dry-doodzy',
-            catsDryCezar: 'cats-dry-cezar',
-            catsDryOther: 'cats-dry-other',
-            catsWet: 'cats-wet',
-            catsLitter: 'cats-litter',
-            catsEssentials: 'cats-essentials',
-            catsCare: 'cats-care',
-            dogsDry: 'dogs-dry',
-            dogsFood: 'dogs-food',
-            dogsTreats: 'dogs-treats',
-            dogsAccessories: 'dogs-accessories',
-            dogsCare: 'dogs-care',
-            reptilesProducts: 'reptiles-products',
-            otherProductsGrid: 'other-products-grid',
-        };
-
         function renderProducts() {
             Object.keys(productsData).forEach(category => {
-                const containerId = categoryIdMap[category] || category.replace(/([A-Z])/g, '-$1').toLowerCase();
-                const container = document.getElementById(containerId);
+                const container = document.getElementById(category.replace(/([A-Z])/g, '-$1').toLowerCase());
                 if (container) {
                     productsData[category].forEach(product => {
                         const productCard = `
@@ -1535,7 +1801,7 @@
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        <span style="color: #7f8c8d; margin-right: 5px;">(125)</span>
+                                        <span style="color: #7f8c8d; margin-right: 5px;">(${Math.floor(Math.random() * 200) + 50})</span>
                                     </div>
                                     <button class="add-to-cart-btn" onclick="addToCart('${product.name}', '${product.icon}')">
                                         <i class="fas fa-shopping-cart"></i> أضف للسلة
@@ -1549,6 +1815,26 @@
             });
         }
 
+        // Tabs Switching Function
+        function switchTab(section, tabName, event) {
+            // إخفاء كل التبويبات في القسم
+            const allTabs = document.querySelectorAll(`#${section} .tab-content`);
+            allTabs.forEach(tab => tab.classList.remove('active'));
+
+            // إزالة التفعيل من كل الأزرار
+            const allBtns = document.querySelectorAll(`#${section} .tab-btn`);
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            // تفعيل التبويب المطلوب
+            const targetTab = document.getElementById(`${section}-${tabName}-tab`);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // تفعيل الزر المطلوب
+            event.currentTarget.classList.add('active');
+        }
+
         // Add to Cart
         function addToCart(name, icon = '📦') {
             const existingItem = cart.find(item => item.name === name);
@@ -1558,16 +1844,18 @@
                 cart.push({name, icon, quantity: 1});
             }
             updateCart();
-            showNotification('تم إضافة المنتج للسلة بنجاح');
+            showNotification('تم إضافة المنتج للسلة بنجاح ✓');
         }
 
         // Update Cart
         function updateCart() {
             const cartBadge = document.getElementById('cartBadge');
             const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
             
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             cartBadge.textContent = totalItems;
+            cartTotal.textContent = totalItems + ' منتج';
             
             if (cart.length === 0) {
                 cartItems.innerHTML = `
@@ -1614,6 +1902,7 @@
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCart();
+            showNotification('تم حذف المنتج من السلة', '#e74c3c');
         }
 
         // Toggle Cart
@@ -1627,7 +1916,7 @@
         // Checkout
         function checkout() {
             if (cart.length === 0) {
-                alert('السلة فارغة!');
+                showNotification('السلة فارغة! أضف منتجات أولاً', '#e74c3c');
                 return;
             }
             
@@ -1650,9 +1939,10 @@
         }
 
         // Show Notification
-        function showNotification(message) {
+        function showNotification(message, color = '#27ae60') {
             const notification = document.createElement('div');
             notification.className = 'notification';
+            notification.style.background = color;
             notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
             document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 3000);
@@ -1665,4 +1955,14 @@
                 const productName = card.querySelector('.product-name').textContent.toLowerCase();
                 card.style.display = productName.includes(searchTerm) ? 'block' : 'none';
             });
-        }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCart();
+        });
+    </script>
+
+</body>
+</html>
